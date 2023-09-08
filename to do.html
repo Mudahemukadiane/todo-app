@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  
+  margin: 0;
+  min-width: 250px;
+  background-color: black;
+}
+
+
+* {
+  box-sizing: border-box;
+}
+
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+
+ul li {
+  cursor: pointer;
+  position: relative;
+  padding: 12px 8px 12px 40px;
+  list-style-type: none;
+  background: rgb(230, 242, 245);
+  font-size: 18px;
+  transition: 0.2s;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+ul li:nth-child(odd) {
+  background: #f9f9f9;
+}
+
+
+ul li:hover {
+  background: rgb(218, 209, 209);
+}
+
+
+ul li.tick{
+  background: #b4a2a2;
+  color: #fff;
+  text-decoration: line-through;
+}
+
+
+ul li.tick:before {
+  content: '';
+  position: absolute;
+  border-color: #fff;
+  border-style: solid;
+  border-width: 0 2px 2px 0;
+  top: 10px;
+  left: 16px;
+  transform: rotate(45deg);
+  height: 15px;
+  width: 7px;
+}
+
+
+.close {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 12px 16px 12px 16px;
+}
+
+.close:hover {
+  background-color: #b4a2a2;
+  color: white;
+}
+
+
+.header {
+  background-color: #000000;
+  padding: 30px 40px;
+  color: white;
+  text-align: center;
+  width: 440px;
+}
+
+
+.header:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+
+input {
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  width: 75%;
+  padding: 10px;
+  float: left;
+  font-size: 16px;
+}
+
+
+.button {
+  padding: 10px;
+  width: 25%;
+  background-color: #b4a2a2;
+  color: #000000;
+  float: left;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+  border-radius: 0;
+}
+
+.button:hover {
+  background-color: rgb(226, 223, 14);
+}
+.container{
+width: 100%;
+ margin-left: 30%;
+ margin-right: 30%;
+/* padding-top: -90px; */ */
+}
+.h1{
+  background-color: #070706;
+  color: #f1ff33;
+  font-size: 32px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: bold;
+}
+.one{
+  width:400px;
+  padding-left: 2.5rem;
+}
+
+</style>
+</head>
+<body>
+<div class="container">
+<div id="myDIV" class="header">
+  <h2 style="margin:5px" class="h1">My Work Activities</h2>
+  <input type="text" id="myInput" placeholder="Title...">
+  <span onclick="newElement()" class="button">Add</span>
+</div>
+<div class="one">
+<ul id="ul">
+  <li>Morning Meeting</li>
+  <li class="tick">Make workers attendance</li>
+  <li>Check The activities to work on</li>
+  <li>Call the Suppliers</li>
+  <li>Make delivery to our customers</li>
+  <li>Organize office</li>
+</ul>
+</div>
+</div>
+<script>
+
+var myNodelist = document.getElementsByTagName("LI");
+var i;
+for (i = 0; i < myNodelist.length; i++) {
+  var span = document.createElement("SPAN");
+  var txt = document.createTextNode("\u00D7");
+  span.className = "close";
+  span.appendChild(txt);
+  myNodelist[i].appendChild(span);
+}
+
+
+var close = document.getElementsByClassName("close");
+var i;
+for (i = 0; i < close.length; i++) {
+  close[i].onclick = function() {
+    var div = this.parentElement;
+    div.style.display = "none";
+  }
+}
+
+
+var list = document.querySelector('ul');
+list.addEventListener('click', function(ev) {
+  if (ev.target.tagName === 'LI') {
+    ev.target.classList.toggle('tick');
+  }
+}, false);
+
+
+function newElement() {
+  var li = document.createElement("li");
+  var inputValue = document.getElementById("myInput").value;
+  var t = document.createTextNode(inputValue);
+  li.appendChild(t);
+  if (inputValue === '') {
+    alert("You must write something!");
+  } else {
+    document.getElementById("ul").appendChild(li);
+  }
+  document.getElementById("myInput").value = "";
+
+  var span = document.createElement("SPAN");
+  var txt = document.createTextNode("\u00D7");
+  span.className = "close";
+  span.appendChild(txt);
+  li.appendChild(span);
+
+  for (i = 0; i < close.length; i++) {
+    close[i].onclick = function() {
+      var div = this.parentElement;
+      div.style.display = "none";
+    }
+  }
+}
+</script>
+
+</body>
+</html>
